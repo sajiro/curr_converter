@@ -1,7 +1,7 @@
 ### How to start the app: run the following commands in your terminal
 * git clone git@github.com:sajiro/curr_converter.git
 * npm install
-* create .env file for the API key
+* create .env file in the root
 * paste this in the .env file  
   ** VITE_APP_API_KEY=NHKNUhI53ZApF4IXCOX1DpUj2YTSl2U1
 * npm run dev - enjoy!
