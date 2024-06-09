@@ -1,32 +1,15 @@
-# React + TypeScript + Vite
+### How to start the app: run the following commands in your terminal
+* git clone git@github.com:sajiro/curr_converter.git
+* npm install
+* create .env file for the API key
+* paste this in the .env file  
+  ** VITE_APP_API_KEY=NHKNUhI53ZApF4IXCOX1DpUj2YTSl2U1
+* npm run dev - enjoy!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Tools / libraries
+* Vite : for easy setup and configure Typescript and react
+* react-query : For data fetching  (invalidation, prefetching)
+* ShadCn UI: for easy native components creation and also it adds tailwind css
+* Tailwind CSS: for easy create ui
+  
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-https://github.com/shadcn-ui/ui/issues/772
