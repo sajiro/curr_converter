@@ -1,4 +1,5 @@
 export type RequestToConvert = {
+  converted?: number;
   from: string;
   to: string;
   amount: number;

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { convertCurrency, fetchCurrencies } from "@/services/service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Currency, RequestToConvert } from "@/models/models";
@@ -19,6 +19,7 @@ function Converter(): JSX.Element {
     mutationFn: (item: RequestToConvert) =>
       convertCurrency(item.from, item.to, item.amount),
     onSuccess: (data) => {
+      console.log(data.value);
       setConvertedValue(data.value);
     },
   });
@@ -28,15 +29,39 @@ function Converter(): JSX.Element {
   const [fromCurrency, setFromCurrency] = useState<string>();
   const [convertedValue, setConvertedValue] = useState(0);
   const currencies: Currency[] = queryCurrencies?.data?.response ?? [];
+  const [convertedCurr, setConvertedCurr] = useState<RequestToConvert[]>([]);
 
   const onClickHandler = () => {
-    if (!toCurrency || !fromCurrency) return;
-    convertMutation.mutate({
+    if (!toCurrency || !fromCurrency || inputValue === 0) return;
+
+    const tmpCurrvalues = {
       to: toCurrency,
       from: fromCurrency,
       amount: inputValue,
-    });
+    };
+
+    convertMutation.mutate(tmpCurrvalues);
   };
+
+  useEffect(() => {
+    if (!toCurrency || !fromCurrency || convertedValue === 0) return;
+
+    const tmpCurrvalues = {
+      to: toCurrency,
+      from: fromCurrency,
+      amount: inputValue,
+      converted: convertedValue,
+    };
+
+    console.log("inputValue", inputValue);
+    const tmpArr = [tmpCurrvalues, ...convertedCurr];
+
+    if (tmpArr.length > 5) {
+      tmpArr.pop();
+    }
+
+    setConvertedCurr(tmpArr);
+  }, [convertedValue]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -98,6 +123,13 @@ function Converter(): JSX.Element {
         >
           Convert
         </Button>
+      </div>
+      <div>
+        {convertedCurr.map((item, index) => (
+          <div key={index + item.from}>
+            {`From: ${item.from}  To: ${item.to} : Converted value: ${item.converted} `}
+          </div>
+        ))}
       </div>
     </div>
   );
